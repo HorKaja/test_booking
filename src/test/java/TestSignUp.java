@@ -14,7 +14,7 @@ public class TestSignUp {
                 .sendKeys("testdata123@test.com")
                 .clickSubmit()
                 .getPasswordInputField()
-                .sendKeys()
+                .sendKeys();
     Assert.assertTrue(openRegisterPage().isPasswordInputDisplayed());
     }
 

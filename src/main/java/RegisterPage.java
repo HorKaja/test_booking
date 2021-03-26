@@ -32,6 +32,7 @@ public class RegisterPage extends BookingHomePage {
         return getEmailInputField().isDisplayed();
     }
 
+    
     public void clickSubmit() {
         this.submitButton.click();
     }

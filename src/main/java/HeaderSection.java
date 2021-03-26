@@ -19,6 +19,7 @@ public class HeaderSection extends BookingHomePage {
     protected final String ATTRACTIONS = "//a[@data-decider-header='attractions']";
     protected final String AIRPORT_TAXIS = "//a[@data-decider-header='rideways']";
 
+
     public RegisterPage openRegisterPage() {
         registerButton.click();
 
