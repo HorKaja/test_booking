@@ -1,54 +1,52 @@
-import org.testng.Assert;
 import org.testng.annotations.*;
 
-import static java.lang.String.format;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class TestSignUp {
 
-    @Test(priority = 2, description = "verify user registration with correct credentials")
+    @Test(priority = 3, description = "verify user registration with correct credentials")
     public void verifyUserRegistrationCorrectCreds() {
-        openRegisterPage()
-                .getEmailInputField()
-                .sendKeys("testdata123@test.com")
-                .clickSubmit()
-                .getPasswordInputField()
-                .sendKeys();
-    Assert.assertTrue(openRegisterPage().isPasswordInputDisplayed());
+        var signUpPage = startRegisterPage()
+                .inputEmail("testdata1234@test.com")
+                .inputPassword("2forget!");
+        assertThat(signUpPage.isUserSignedIn())
+                .as("The user is not authorized in the app")
+                .isTrue();
     }
 
-    @Test(priority = 1, description = "verify register button leads to registration form")
+    @Test(priority = 2, description = "verify register button leads to registration form")
     public void verifyRegisterButtonLeadsRegisterForm() {
-        String messageText = openRegisterPage()
+        var registeredPage = startRegisterPage();
+        var messageText = registeredPage
                 .getSignInOrCreateAccountLabel();
 
         assertThat(messageText)
-                .as("Registeration form is not displayed or no message is shown")
-                .isEqualTo("Sign in or create an account");
-        Assert.assertTrue(openRegisterPage().isEmailFieldDisplayed());
+                .as("Incorrect message text")
+                .isEqualTo(registeredPage.getSignInMessage());
+
+        assertThat(registeredPage.isEmailFieldDisplayed())
+                .as("Email input field should be displayed")
+                .isTrue();
     }
 
-    private RegisterPage openRegisterPage() {
+    @Test(priority = 1, description = "verify the user can find a hotel in specified city")
+    public void verifyTheUserCanFindHotel() {
+        StaySearchResultPage location = new BookingHomePage()
+                .openBookingHomePage()
+                .getStaySearchSection()
+                .chooseStaysOptions("Khmelnytskyi", "2021-04-01", "2021-04-02");
+        assertThat(location.getResultsTitle().isDisplayed())
+                .as("The hotels in specified city are not found")
+                .isTrue();
+    }
+
+    private RegisterPage startRegisterPage() {
         return new BookingHomePage()
                 .openBookingHomePage()
                 .getHeaderSection()
                 .openRegisterPage();
     }
 
-
-//    @Test(priority = 2, description = "verify correct email accepted")
-//    public void verifyCorrectEmailAccepted() {
-//        emailInputField.sendKeys("testdata123@test.com");
-//        WebElement submitEmailButton = driver.findElement(By.cssSelector("button[type='submit']"));
-//        submitEmailButton.click();
-//        WebElement
-//        Assert.assertTrue(emailInputField.isDisplayed());
-//    }
-
-
-//    @AfterClass
-//    public void teardown() {
-//        driver.quit();
-//    }
 }

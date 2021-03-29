@@ -25,4 +25,6 @@ public class HeaderSection extends BookingHomePage {
 
         return new RegisterPage();
     }
+
+
 }

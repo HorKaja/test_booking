@@ -8,9 +8,6 @@ public class BookingHomePage {
 
      private String URL = "https://www.booking.com/";
 
-     protected SelenideElement searchFieldForDestination = $x("//input[@id='ss']");
-     protected SelenideElement searchButton = $x("//button[@data-sb-id='main']");
-
      public BookingHomePage openBookingHomePage() {
           open(URL);
 
@@ -19,6 +16,10 @@ public class BookingHomePage {
 
      public HeaderSection getHeaderSection() {
           return new HeaderSection();
+     }
+
+     public StaysSearchSection getStaySearchSection() {
+          return new StaysSearchSection();
      }
 
 
