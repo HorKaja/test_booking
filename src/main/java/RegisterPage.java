@@ -1,9 +1,7 @@
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.By;
+
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -12,7 +10,6 @@ public class RegisterPage  {
 
     private SelenideElement signInOrCreateAccountLabel = $x("//h1[contains(text(), 'Sign in or create an account')]");
     private SelenideElement createPasswordLabel = $x("//h1[contains(text(), 'Create password')]");
-
     private SelenideElement emailInputField = $x("//input[@id='username']");
     private SelenideElement submitButton = $("button[type='submit']");
     private SelenideElement passwordInputField = $x("//input[@id='new_password']");
@@ -38,29 +35,15 @@ public class RegisterPage  {
     }
 
     public RegisterPage inputEmail(String email) {
-        RegisterPage page = new RegisterPage();
-        page
-                .emailInputField
-                .sendKeys(email);
-        page
-                .submitButton
-                .click();
-        return new RegisterPage();
+        emailInputField.sendKeys(email);
+        submitButton.click();
+        return this;
     }
 
     public SignedUserHeaderSection inputPassword(String password) {
-        RegisterPage page = new RegisterPage();
-        page
-                .passwordInputField
-                .sendKeys(password);
-
-        page
-                .passwordConfirmField
-                .sendKeys(password);
-
-        page
-                .submitButton
-                .click();
+        passwordInputField.sendKeys(password);
+        passwordConfirmField.sendKeys(password);
+        submitButton.click();
 
         actions()
                 .moveToElement(securityCheckButton)

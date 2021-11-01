@@ -1,5 +1,4 @@
-import org.testng.annotations.*;
-
+import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,8 +8,8 @@ public class TestSignUp {
     @Test(priority = 3, description = "verify user registration with correct credentials")
     public void verifyUserRegistrationCorrectCreds() {
         var signUpPage = startRegisterPage()
-                .inputEmail("testdata1234@test.com")
-                .inputPassword("2forget!");
+                .inputEmail("testdata12@test.com")
+                .inputPassword("Try2forget!");
         assertThat(signUpPage.isUserSignedIn())
                 .as("The user is not authorized in the app")
                 .isTrue();
@@ -36,7 +35,7 @@ public class TestSignUp {
         StaySearchResultPage location = new BookingHomePage()
                 .openBookingHomePage()
                 .getStaySearchSection()
-                .chooseStaysOptions("Khmelnytskyi", "2021-04-01", "2021-04-02");
+                .chooseStaysOptions("Khmelnytskyi", "2021-04-05", "2021-04-06");
         assertThat(location.getResultsTitle().isDisplayed())
                 .as("The hotels in specified city are not found")
                 .isTrue();
