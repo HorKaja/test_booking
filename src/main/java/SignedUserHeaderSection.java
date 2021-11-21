@@ -13,3 +13,4 @@ public class SignedUserHeaderSection extends HeaderSection{
         } else {return false;}
     }
 }
+
