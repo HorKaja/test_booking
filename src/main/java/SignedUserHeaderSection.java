@@ -12,5 +12,4 @@ public class SignedUserHeaderSection extends HeaderSection{
             return true;
         } else {return false;}
     }
-
 }
